@@ -1,0 +1,67 @@
+/* ============================================================
+   Digicomplish — header visibility (follows Beratung's
+   transparent-over-hero -> solid-on-scroll pattern)
+   ============================================================ */
+
+/* Default (transparent header over the dark home hero): white logo */
+header .vamtam-sticky-header--transparent-header .elementor-widget-image img{
+  filter:brightness(0) invert(1);
+  transition:filter .25s ease;
+}
+
+/* Solid header state:
+   - inner pages: always (body.digi-page)
+   - home page: once scrolled past the hero (body.digi-stuck)
+   The fixed header section paints no background of its own, so we lay a
+   fixed white bar behind the header content (which sits at z-index 1000). */
+body.digi-page::before,
+body.digi-stuck::before{
+  content:"";
+  position:fixed;
+  top:0; left:0; right:0;
+  height:80px;
+  background:#ffffff;
+  border-bottom:1px solid #eef0ec;
+  box-shadow:0 10px 30px -24px rgba(0,0,0,.35);
+  z-index:999;
+  pointer-events:none;
+}
+body.digi-page  .vamtam-sticky-header--transparent-header,
+body.digi-stuck .vamtam-sticky-header--transparent-header{
+  background:#ffffff !important;
+}
+
+/* Dark nav text / buttons / carets / icons on the solid header */
+body.digi-page  .vamtam-sticky-header--transparent-header .elementor-item,
+body.digi-page  .vamtam-sticky-header--transparent-header .vamtam-nav-text,
+body.digi-page  .vamtam-sticky-header--transparent-header .vamtam-btn-text,
+body.digi-page  .vamtam-sticky-header--transparent-header .sub-arrow,
+body.digi-page  .vamtam-sticky-header--transparent-header .elementor-icon i,
+body.digi-stuck .vamtam-sticky-header--transparent-header .elementor-item,
+body.digi-stuck .vamtam-sticky-header--transparent-header .vamtam-nav-text,
+body.digi-stuck .vamtam-sticky-header--transparent-header .vamtam-btn-text,
+body.digi-stuck .vamtam-sticky-header--transparent-header .sub-arrow,
+body.digi-stuck .vamtam-sticky-header--transparent-header .elementor-icon i{
+  color:#161616 !important;
+}
+body.digi-page  .vamtam-sticky-header--transparent-header .elementor-icon svg,
+body.digi-stuck .vamtam-sticky-header--transparent-header .elementor-icon svg{
+  fill:#161616 !important;
+}
+
+/* Solid header -> show the real dark+orange logo (no invert) */
+body.digi-page  .vamtam-sticky-header--transparent-header .elementor-widget-image img,
+body.digi-stuck .vamtam-sticky-header--transparent-header .elementor-widget-image img{
+  filter:none !important;
+}
+
+/* Logo sizing so the wide logo sits nicely in the bar */
+header .elementor-element-7ad430b img{height:34px !important;width:auto !important}
+
+/* Dropdown submenu items always readable (white submenu panel) */
+header .sub-menu .elementor-sub-item,
+header .sub-menu .elementor-sub-item .vamtam-nav-text{color:#161616 !important}
+
+/* Mobile toggle icon visible on solid header */
+body.digi-page .elementor-menu-toggle,
+body.digi-stuck .elementor-menu-toggle{color:#161616 !important}
