@@ -1,67 +1,93 @@
 /* ============================================================
-   Digicomplish — header visibility (follows Beratung's
-   transparent-over-hero -> solid-on-scroll pattern)
+   Digicomplish — matches the Beratung template.
+   Home: transparent header (white logo + white nav) over the dark hero.
+   Inner pages (body.digi-page): SOLID white header (scrolls with the page,
+   no fixed bar) with the dark logo and #161616 nav text.
    ============================================================ */
 
-/* Default (transparent header over the dark home hero): white logo */
+/* ---------- Home (transparent header): white logo ---------- */
 header .vamtam-sticky-header--transparent-header .elementor-widget-image img{
   filter:brightness(0) invert(1);
-  transition:filter .25s ease;
+  transition:filter .2s ease;
 }
 
-/* Solid header state:
-   - inner pages: always (body.digi-page)
-   - home page: once scrolled past the hero (body.digi-stuck)
-   The fixed header section paints no background of its own, so we lay a
-   fixed white bar behind the header content (which sits at z-index 1000). */
-body.digi-page::before,
-body.digi-stuck::before{
-  content:"";
-  position:fixed;
-  top:0; left:0; right:0;
-  height:80px;
-  background:#ffffff;
-  border-bottom:1px solid #eef0ec;
-  box-shadow:0 10px 30px -24px rgba(0,0,0,.35);
-  z-index:999;
-  pointer-events:none;
+/* ---------- Inner pages: solid white header ---------- */
+/* Paint the header section itself white (it is position:relative on inner
+   pages, so it scrolls away naturally — no orphaned fixed bar). */
+body.digi-page header .vamtam-sticky-header{
+  background-color:#ffffff !important;
 }
-body.digi-page  .vamtam-sticky-header--transparent-header,
-body.digi-stuck .vamtam-sticky-header--transparent-header{
-  background:#ffffff !important;
-}
-
-/* Dark nav text / buttons / carets / icons on the solid header */
-body.digi-page  .vamtam-sticky-header--transparent-header .elementor-item,
-body.digi-page  .vamtam-sticky-header--transparent-header .vamtam-nav-text,
-body.digi-page  .vamtam-sticky-header--transparent-header .vamtam-btn-text,
-body.digi-page  .vamtam-sticky-header--transparent-header .sub-arrow,
-body.digi-page  .vamtam-sticky-header--transparent-header .elementor-icon i,
-body.digi-stuck .vamtam-sticky-header--transparent-header .elementor-item,
-body.digi-stuck .vamtam-sticky-header--transparent-header .vamtam-nav-text,
-body.digi-stuck .vamtam-sticky-header--transparent-header .vamtam-btn-text,
-body.digi-stuck .vamtam-sticky-header--transparent-header .sub-arrow,
-body.digi-stuck .vamtam-sticky-header--transparent-header .elementor-icon i{
-  color:#161616 !important;
-}
-body.digi-page  .vamtam-sticky-header--transparent-header .elementor-icon svg,
-body.digi-stuck .vamtam-sticky-header--transparent-header .elementor-icon svg{
-  fill:#161616 !important;
-}
-
-/* Solid header -> show the real dark+orange logo (no invert) */
-body.digi-page  .vamtam-sticky-header--transparent-header .elementor-widget-image img,
-body.digi-stuck .vamtam-sticky-header--transparent-header .elementor-widget-image img{
-  filter:none !important;
-}
-
-/* Logo sizing so the wide logo sits nicely in the bar */
-header .elementor-element-7ad430b img{height:34px !important;width:auto !important}
-
-/* Dropdown submenu items always readable (white submenu panel) */
+body.digi-page header .vamtam-sticky-header--spacer{ background-color:#ffffff !important; }
+/* Dark logo (real colours) */
+body.digi-page header .elementor-widget-image img{ filter:none !important; }
+/* Dark nav text / buttons / carets / toggle / icons — template colour */
+body.digi-page header .elementor-item,
+body.digi-page header .vamtam-nav-text,
+body.digi-page header .vamtam-btn-text,
+body.digi-page header .sub-arrow,
+body.digi-page header .elementor-menu-toggle,
+body.digi-page header .elementor-icon i{ color:#161616 !important; }
+body.digi-page header .elementor-icon svg{ fill:#161616 !important; }
+/* logo size + readable dropdown items */
+header .elementor-element-7ad430b img{ height:34px !important; width:auto !important; }
 header .sub-menu .elementor-sub-item,
-header .sub-menu .elementor-sub-item .vamtam-nav-text{color:#161616 !important}
+header .sub-menu .vamtam-nav-text{ color:#161616 !important; }
 
-/* Mobile toggle icon visible on solid header */
-body.digi-page .elementor-menu-toggle,
-body.digi-stuck .elementor-menu-toggle{color:#161616 !important}
+/* ---------- Inner-page banner (matches the reference) ---------- */
+.digi-hero{
+  position:relative !important; overflow:hidden !important;
+  background-color:#e7edf2 !important;                /* light blue-gray */
+  background-image:url('/wp-content/uploads/2023/07/dots-left.png') !important;
+  background-repeat:no-repeat !important;
+  background-position:left center !important;
+  background-size:auto 100% !important;
+  padding:140px 0 92px !important;
+}
+/* translucent green triangles on the right */
+.digi-hero::before{
+  content:"" !important; position:absolute; z-index:0;
+  right:30px; top:24px; width:280px; height:380px;
+  background:rgba(143,210,153,.32);
+  clip-path:polygon(100% 0, 100% 100%, 0 100%);
+}
+.digi-hero::after{
+  content:"" !important; position:absolute; z-index:0;
+  right:150px; top:-40px; width:300px; height:430px;
+  background:rgba(143,210,153,.22);
+  clip-path:polygon(100% 0, 100% 100%, 0 100%);
+}
+.digi-hero .digi-wrap{ position:relative; z-index:1; }
+.digi-hero .digi-crumbs{ color:#5f6b73 !important; }
+.digi-hero .digi-crumbs a:hover{ color:#8FD299 !important; }
+/* dark-green label tag with the brand slash */
+.digi-hero .eyebrow{
+  display:inline-flex !important; align-items:center; gap:12px;
+  background:#2f4a3a !important; color:#ffffff !important;
+  padding:13px 24px !important; margin-bottom:0 !important;
+  font-size:.82rem !important; letter-spacing:.12em; text-transform:uppercase; font-weight:500 !important;
+}
+.digi-hero .eyebrow::before{
+  content:"" !important; width:16px; height:22px; background:#8FD299 !important;
+  transform:skewX(-14deg); display:inline-block; border-radius:0;
+}
+.digi-hero h1{
+  color:#161616 !important; font-weight:400; letter-spacing:-.02em;
+  background:#ffffff !important; display:inline-block !important;
+  padding:26px 40px 26px 30px !important; margin:0 !important; max-width:20ch;
+}
+.digi-hero p{ color:#3b464d !important; margin-top:26px !important; max-width:56ch; }
+
+/* ---------- Buttons: clearly visible (template colours) ---------- */
+.digi-btn{
+  background:#161616 !important; color:#ffffff !important; border:1px solid #161616 !important;
+}
+.digi-btn:hover{ background:#8FD299 !important; border-color:#8FD299 !important; color:#161616 !important; }
+.digi-btn.light{ background:#ffffff !important; color:#161616 !important; border-color:#ffffff !important; }
+.digi-btn.light:hover{ background:#161616 !important; color:#ffffff !important; border-color:#161616 !important; }
+.digi-card a[href]:not(.digi-btn){ color:#161616 !important; }
+
+@media(max-width:960px){
+  .digi-hero{ padding:120px 0 64px !important; background-size:auto 70% !important; }
+  .digi-hero::before,.digi-hero::after{ opacity:.5; }
+  .digi-hero h1{ padding-right:24px !important; }
+}
