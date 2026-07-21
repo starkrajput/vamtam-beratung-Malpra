@@ -124,26 +124,22 @@ i[class*="eicon"], i[class*="fa-"], .fa, .fas, .far, .fab, .fal,
 }
 
 /* ============================================================
-   Navbar: whenever the brand-green background appears in the
-   header, force the text (and any icon) to white for contrast.
-   Covers the CTA hover state + any inline green background.
+   Navbar green state — driven ONLY by digi-brand.js, which adds
+   the .nav-on-green class to a header bar when it detects the bar
+   has actually turned green. When it is NOT green, nothing here
+   applies and the header keeps its original colours untouched.
    ============================================================ */
-header .elementor-button:hover,
-header .elementor-button:hover .elementor-button-text,
-header .elementor-button:focus,
-header .elementor-button:focus .elementor-button-text,
-header a.elementor-item.green, header .nav-green,
-header [style*="8FD299"], header [style*="143, 210, 153"],
-header [style*="rgb(143, 210, 153)"],
-.vamtam-sticky-header[style*="8FD299"],
-.vamtam-sticky-header--green, .vamtam-sticky-header--green *{
+.vamtam-sticky-header.nav-on-green .elementor-item,
+.vamtam-sticky-header.nav-on-green .vamtam-nav-text,
+.vamtam-sticky-header.nav-on-green .vamtam-btn-text,
+.vamtam-sticky-header.nav-on-green .elementor-button,
+.vamtam-sticky-header.nav-on-green .elementor-button-text,
+.vamtam-sticky-header.nav-on-green .sub-arrow,
+.vamtam-sticky-header.nav-on-green .elementor-menu-toggle,
+.vamtam-sticky-header.nav-on-green .elementor-icon i{
   color:#ffffff !important;
 }
-header .elementor-button:hover .elementor-button-icon i,
-header .elementor-button:hover svg,
-.vamtam-sticky-header--green .elementor-icon i{
-  color:#ffffff !important; fill:#ffffff !important;
-}
+.vamtam-sticky-header.nav-on-green .elementor-icon svg{ fill:#ffffff !important; }
 
 /* ============================================================
    Header fix (matches reference image 1): on the SOLID white
