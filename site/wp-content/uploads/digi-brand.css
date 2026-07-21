@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
 /* ============================================================
    Digicomplish — matches the Beratung template.
    Home: transparent header (white logo + white nav) over the dark hero.
@@ -91,3 +93,91 @@ header .sub-menu .vamtam-nav-text{ color:#161616 !important; }
   .digi-hero::before,.digi-hero::after{ opacity:.5; }
   .digi-hero h1{ padding-right:24px !important; }
 }
+
+/* ============================================================
+   Client requirement: Montserrat everywhere (text only — icon
+   fonts are left untouched so glyphs keep rendering).
+   Setting the family on <body> makes every span/div/p inherit
+   Montserrat automatically; elements that hard-code Geologica
+   are overridden explicitly below.
+   ============================================================ */
+body,
+h1, h2, h3, h4, h5, h6,
+p, a, li, ul, ol, blockquote, label, small, strong, b, em,
+button, input, textarea, select, table, th, td,
+.elementor-heading-title,
+.elementor-button, .elementor-button-text,
+.elementor-widget-text-editor, .elementor-widget-text-editor *,
+.elementor-widget-container,
+.elementor-item, .elementor-sub-item,
+.vamtam-nav-text, .vamtam-btn-text,
+.digi-hero h1, .digi-hero p, .digi-hero .eyebrow,
+.digi-card, .digi-card *{
+  font-family:'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+}
+/* Never override the icon fonts (Font Awesome / eicons / theme icons / icomoon) */
+i[class*="eicon"], i[class*="fa-"], .fa, .fas, .far, .fab, .fal,
+[class^="vamtam-theme-icon"], [class*=" vamtam-theme-icon"],
+.elementor-icon i, .elementor-icon svg, .sub-arrow:before,
+[class*="icon-"]:before, .elementor-item:after, .elementor-item:before{
+  font-family:revert;
+}
+
+/* ============================================================
+   Navbar: whenever the brand-green background appears in the
+   header, force the text (and any icon) to white for contrast.
+   Covers the CTA hover state + any inline green background.
+   ============================================================ */
+header .elementor-button:hover,
+header .elementor-button:hover .elementor-button-text,
+header .elementor-button:focus,
+header .elementor-button:focus .elementor-button-text,
+header a.elementor-item.green, header .nav-green,
+header [style*="8FD299"], header [style*="143, 210, 153"],
+header [style*="rgb(143, 210, 153)"],
+.vamtam-sticky-header[style*="8FD299"],
+.vamtam-sticky-header--green, .vamtam-sticky-header--green *{
+  color:#ffffff !important;
+}
+header .elementor-button:hover .elementor-button-icon i,
+header .elementor-button:hover svg,
+.vamtam-sticky-header--green .elementor-icon i{
+  color:#ffffff !important; fill:#ffffff !important;
+}
+
+/* ============================================================
+   Header fix (matches reference image 1): on the SOLID white
+   inner-page header the "Contact us" CTA must be a visible dark
+   OUTLINED button — the default white border/white text made it
+   invisible on the white bar (image 2). Home (transparent
+   header over the dark hero) keeps the white outlined button.
+   ============================================================ */
+body.digi-page header .elementor-button,
+body.digi-page header .vamtam-sticky-header--transparent-header .elementor-button{
+  position:relative !important;
+  background:transparent !important;
+  color:#161616 !important;
+  transition:background-color .2s ease, color .2s ease;
+}
+/* Dark text on the white inner-page header */
+body.digi-page header .elementor-button .elementor-button-text,
+body.digi-page header .vamtam-sticky-header--transparent-header .elementor-button .elementor-button-text{
+  color:#161616 !important; position:relative; z-index:1;
+}
+/* Outline drawn as a pseudo-element — the theme's sticky script rewrites the
+   button's own border/box-shadow, but it cannot touch ::after. */
+body.digi-page header .elementor-button::after{
+  content:"" !important; position:absolute !important; inset:0 !important;
+  border:1px solid #161616 !important; border-radius:inherit;
+  pointer-events:none !important; z-index:0; transition:background-color .2s ease;
+}
+/* Hover: fill dark, white text */
+body.digi-page header .elementor-button:hover::after{ background:#161616 !important; }
+body.digi-page header .elementor-button:hover .elementor-button-text{ color:#ffffff !important; }
+
+/* ============================================================
+   Contact page — Google map framing
+   ============================================================ */
+.digi-map{ position:relative; width:100%; margin:0; line-height:0; }
+.digi-map iframe{ width:100%; height:460px; border:0; display:block; filter:grayscale(.15); }
+@media(max-width:960px){ .digi-map iframe{ height:340px; } }
