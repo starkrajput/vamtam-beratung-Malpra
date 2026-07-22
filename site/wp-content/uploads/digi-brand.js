@@ -102,10 +102,102 @@
     });
   }
 
+  // ---------- Stat counters: numbers count up when scrolled into view ----------
+  function initCounters() {
+    var els = [].slice.call(document.querySelectorAll('.digi-count, .digi-stat .big'));
+    if (!els.length) return;
+
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Parse "1000+", "100%", "3+" into prefix / number / suffix, then zero it out.
+    els = els.filter(function (el) {
+      var m = el.textContent.trim().match(/^(\D*?)([\d.,]+)(\D*)$/);
+      if (!m) return false;
+      el.setAttribute('data-pre', m[1]);
+      el.setAttribute('data-target', m[2].replace(/,/g, ''));
+      el.setAttribute('data-suf', m[3]);
+      if (!reduced) el.textContent = m[1] + '0' + m[3];
+      return true;
+    });
+    if (reduced || !els.length) return;
+
+    function run(el) {
+      if (el.getAttribute('data-counted')) return;
+      el.setAttribute('data-counted', '1');
+      var pre = el.getAttribute('data-pre') || '';
+      var suf = el.getAttribute('data-suf') || '';
+      var target = parseFloat(el.getAttribute('data-target'));
+      var dec = (el.getAttribute('data-target').split('.')[1] || '').length;
+      var dur = 1800, start = null;
+      function step(ts) {
+        if (start === null) start = ts;
+        var p = Math.min(1, (ts - start) / dur);
+        var eased = 1 - Math.pow(1 - p, 3);            // ease-out cubic
+        var v = target * eased;
+        el.textContent = pre + (dec ? v.toFixed(dec) : Math.round(v)) + suf;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = pre + (dec ? target.toFixed(dec) : target) + suf;
+      }
+      requestAnimationFrame(step);
+    }
+
+    function inView(el) {
+      var r = el.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      return r.top < vh * 0.9 && r.bottom > 0;
+    }
+    function pending() { return els.filter(function (el) { return !el.getAttribute('data-counted'); }); }
+
+    var ticking = false;
+    function check() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var left = pending();
+        left.forEach(function (el) { if (inView(el)) run(el); });
+        if (!pending().length) {
+          window.removeEventListener('scroll', check);
+          window.removeEventListener('resize', check);
+        }
+      });
+    }
+
+    // Scroll-driven check is the primary trigger — it works even where
+    // IntersectionObserver callbacks are throttled (e.g. background tabs).
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check, { passive: true });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.35 });
+      els.forEach(function (el) { io.observe(el); });
+    }
+    check();
+    // Re-check once the tab becomes visible (counters parked off-screen in a
+    // background tab would otherwise sit at zero).
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) check(); });
+    // Failsafe: never leave a stat stuck showing 0 — if anything above failed,
+    // snap any still-pending, already-visible counter to its final value.
+    setTimeout(function () {
+      pending().forEach(function (el) {
+        if (inView(el)) {
+          el.setAttribute('data-counted', '1');
+          el.textContent = (el.getAttribute('data-pre') || '') +
+                           el.getAttribute('data-target') +
+                           (el.getAttribute('data-suf') || '');
+        }
+      });
+    }, 5000);
+  }
+
   function boot() {
     update();
     bindButtons();
     initSliders();
+    initCounters();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update, { passive: true });
     // Catch class/style changes made by the theme's sticky script.
