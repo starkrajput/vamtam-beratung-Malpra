@@ -177,6 +177,57 @@ body.digi-page header .elementor-button:hover .elementor-button-icon i,
 body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fill:#ffffff !important; }
 
 /* ============================================================
+   Home hero slider — mirrors digicomplish.com's rotating hero:
+   three slides advance one by one, and within each slide the
+   eyebrow → heading → button rise in, staggered.
+   ============================================================ */
+.digi-slider{ position:relative; }
+.digi-slide{
+  position:absolute; left:0; top:0; right:0;
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .6s ease, visibility .6s;
+}
+.digi-slide.is-active{
+  position:relative; opacity:1; visibility:visible; pointer-events:auto;
+}
+.digi-slide-eyebrow{
+  display:inline-flex; align-items:center; gap:12px;
+  color:#8FD299; font-size:.82rem; letter-spacing:.16em;
+  text-transform:uppercase; font-weight:500; margin:0 0 18px;
+}
+.digi-slide-eyebrow::before{
+  content:""; display:inline-block; width:28px; height:2px; background:#8FD299;
+}
+.digi-slide-title{
+  /* !important — the theme's `.elementor-kit-5 h1` rule outranks a single class
+     and would otherwise paint this dark on the dark hero */
+  color:#ffffff !important; font-weight:400; letter-spacing:-.02em; margin:0 0 28px;
+  font-size:clamp(2.1rem,4.4vw,3.7rem); line-height:1.09; max-width:20ch;
+}
+.digi-slide-eyebrow{ color:#8FD299 !important; }
+.digi-slide-btn{
+  display:inline-block; padding:16px 34px; border:1px solid #ffffff;
+  color:#ffffff !important; text-decoration:none; font-size:.95rem;
+  transition:background-color .25s ease, border-color .25s ease;
+}
+.digi-slide-btn:hover{ background:#8FD299; border-color:#8FD299; color:#ffffff !important; }
+/* staggered "one by one" entrance */
+.digi-slide.is-active .digi-slide-eyebrow{ animation:digiRise .6s .05s both; }
+.digi-slide.is-active .digi-slide-title  { animation:digiRise .6s .22s both; }
+.digi-slide.is-active .digi-slide-btn    { animation:digiRise .6s .40s both; }
+@keyframes digiRise{ from{ opacity:0; transform:translateY(26px);} to{ opacity:1; transform:none; } }
+.digi-slider-dots{ display:flex; gap:10px; margin-top:36px; }
+.digi-slider-dots button{
+  width:30px; height:3px; padding:0; border:0; cursor:pointer;
+  background:rgba(255,255,255,.35); transition:background-color .25s ease;
+}
+.digi-slider-dots button.is-active{ background:#8FD299; }
+@media(max-width:767px){
+  .digi-slide-title{ max-width:100%; }
+  .digi-slide-btn{ padding:14px 26px; }
+}
+
+/* ============================================================
    Contact page — Google map framing
    ============================================================ */
 .digi-map{ position:relative; width:100%; margin:0; line-height:0; }

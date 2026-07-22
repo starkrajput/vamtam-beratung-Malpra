@@ -61,9 +61,51 @@
     document.querySelectorAll('.elementor-button').forEach(markBtn);
   }
 
+  // ---------- Home hero slider: advance the slides one by one ----------
+  function initSliders() {
+    document.querySelectorAll('.digi-slider').forEach(function (root) {
+      var slides = [].slice.call(root.querySelectorAll('.digi-slide'));
+      if (slides.length < 2) return;
+      var dotsWrap = root.querySelector('.digi-slider-dots');
+      var delay = parseInt(root.getAttribute('data-interval'), 10) || 6000;
+      var i = Math.max(0, slides.findIndex(function (s) { return s.classList.contains('is-active'); }));
+      var timer = null, dots = [];
+
+      function show(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+        dots.forEach(function (d, k) {
+          d.classList.toggle('is-active', k === i);
+          d.setAttribute('aria-selected', k === i ? 'true' : 'false');
+        });
+      }
+      function start() { stop(); timer = setInterval(function () { show(i + 1); }, delay); }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+      if (dotsWrap) {
+        slides.forEach(function (_, k) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('role', 'tab');
+          b.setAttribute('aria-label', 'Go to slide ' + (k + 1));
+          b.addEventListener('click', function () { show(k); start(); });
+          dotsWrap.appendChild(b); dots.push(b);
+        });
+      }
+      show(i);
+      start();
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) { stop(); } else { start(); }
+      });
+    });
+  }
+
   function boot() {
     update();
     bindButtons();
+    initSliders();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update, { passive: true });
     // Catch class/style changes made by the theme's sticky script.
