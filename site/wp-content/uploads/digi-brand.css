@@ -233,7 +233,22 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
    (white cards, brand-green accents, dark headings).
    ============================================================ */
 .digi-trio-section{ padding:0 0 96px; }
-.digi-trio{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+/* The Elementor container is display:flex, so the grid would otherwise be a
+   flex item sized to its content and sit flush left. Make it fill the
+   container and share the same 30px side padding as the rest of the page
+   so the cards line up with the headings above them. */
+.digi-trio-section > .elementor-container{ margin-left:auto; margin-right:auto; }
+.digi-trio{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:30px;
+  flex:1 1 100%; width:100%; box-sizing:border-box;
+  margin-left:auto; margin-right:auto;
+}
+/* Above the 1280px container width the theme's content sits flush with the
+   container edge; below it the content is inset 30px. Mirror that exactly so
+   the cards always line up with the headings above them. */
+@media(max-width:1280px){
+  .digi-trio{ padding-left:30px; padding-right:30px; }
+}
 .digi-trio-card{
   display:flex; flex-direction:column; background:#ffffff;
   border:1px solid rgba(0,0,0,.09); text-decoration:none !important;
