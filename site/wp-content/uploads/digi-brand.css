@@ -292,6 +292,25 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 }
 
 /* ============================================================
+   Tinted content boxes (Talent Fulfillment page) — soft brand
+   tint instead of plain white, matching the reference design.
+   ============================================================ */
+.digi-tint .digi-card{
+  background:#FDE3C4 !important;
+  border:1px solid rgba(255,155,0,.30) !important;
+  border-radius:10px;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.digi-tint .digi-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 26px 52px -32px rgba(150,90,0,.35);
+  border-color:rgba(255,155,0,.65) !important;
+}
+.digi-tint .digi-card h3{ color:#161616 !important; }
+.digi-tint .digi-card p{ color:#4a4033 !important; }
+.digi-tint .digi-card .num{ color:#F08A00 !important; }
+
+/* ============================================================
    Contact page — Google map framing
    ============================================================ */
 .digi-map{ position:relative; width:100%; margin:0; line-height:0; }
