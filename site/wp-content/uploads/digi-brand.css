@@ -337,6 +337,23 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 }
 
 /* ============================================================
+   Legal pages (Privacy Policy / Terms of Use) — readable measure
+   and clear section rhythm.
+   ============================================================ */
+.digi-legal{ max-width:860px; }
+.digi-legal .digi-lead{ margin-bottom:34px; }
+.digi-legal h2{
+  font-size:clamp(1.25rem,2.2vw,1.6rem); font-weight:500; line-height:1.25;
+  margin:38px 0 12px; color:#161616;
+}
+.digi-legal h2:first-of-type{ margin-top:0; }
+.digi-legal p{ color:#3b3f3b; line-height:1.75; margin:0 0 14px; }
+.digi-legal a{ color:#161616; border-bottom:1px solid #8FD299; }
+.digi-legal a:hover{ color:#8FD299; }
+.digi-legal .digi-list{ margin:6px 0 14px; }
+.digi-legal .digi-list li{ margin-bottom:9px; line-height:1.6; }
+
+/* ============================================================
    Contact page — "Find us" map band, sitting ABOVE the form.
    Dark world-map backdrop with the live Google map floating on
    top as a rounded, shadowed card + an address plate.
