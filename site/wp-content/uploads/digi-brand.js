@@ -148,19 +148,16 @@
     }
     function pending() { return els.filter(function (el) { return !el.getAttribute('data-counted'); }); }
 
-    var ticking = false;
+    // Deliberately synchronous: gating this behind requestAnimationFrame would
+    // deadlock in a background tab (rAF is frozen, so the "ticking" flag would
+    // never reset and the counters would stay at zero forever). Only a handful
+    // of elements are measured, so the cost is negligible.
     function check() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        ticking = false;
-        var left = pending();
-        left.forEach(function (el) { if (inView(el)) run(el); });
-        if (!pending().length) {
-          window.removeEventListener('scroll', check);
-          window.removeEventListener('resize', check);
-        }
-      });
+      pending().forEach(function (el) { if (inView(el)) run(el); });
+      if (!pending().length) {
+        window.removeEventListener('scroll', check);
+        window.removeEventListener('resize', check);
+      }
     }
 
     // Scroll-driven check is the primary trigger — it works even where
