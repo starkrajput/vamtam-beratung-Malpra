@@ -14,9 +14,16 @@ header .vamtam-sticky-header--transparent-header .elementor-widget-image img{
 }
 
 /* ---------- Inner pages: solid white header ---------- */
-/* Paint the header section itself white (it is position:relative on inner
-   pages, so it scrolls away naturally — no orphaned fixed bar). */
-body.digi-page header .vamtam-sticky-header{
+/* Paint the header section itself white in EVERY state. The theme repaints
+   the sticky bar with --vamtam-sticky-header-bg-color (#374B47, dark green)
+   once you scroll, which left dark nav text unreadable — force that variable
+   AND the fixed/scrolled variants back to white so the inner-page header
+   stays white with dark text top-to-bottom. */
+body.digi-page{ --vamtam-sticky-header-bg-color:#ffffff !important; }
+body.digi-page header .vamtam-sticky-header,
+body.digi-page header .vamtam-sticky-header--fixed,
+body.digi-page header .vamtam-sticky-header--fixed-shown,
+body.digi-page header .vamtam-sticky-header--transparent-header.vamtam-sticky-header--fixed{
   background-color:#ffffff !important;
 }
 body.digi-page header .vamtam-sticky-header--spacer{ background-color:#ffffff !important; }
@@ -44,29 +51,17 @@ header .sub-menu .vamtam-nav-text{ color:#161616 !important; }
   position:relative !important; overflow:hidden !important;
   background:linear-gradient(180deg,rgba(15,26,20,.55) 0%,rgba(15,26,20,.82) 100%),
              url('/wp-content/uploads/2023/06/GettyImages-1185765407.jpg') center/cover no-repeat !important;
-  min-height:460px !important;
-  display:flex !important; align-items:flex-end !important;   /* content at the bottom */
-  padding:170px 0 62px !important;
+  min-height:0 !important;
+  display:block !important;
+  padding:66px 0 60px !important;   /* tighter — removes the big empty gap above the content */
 }
 .digi-hero::before, .digi-hero::after{ content:none !important; }   /* drop the old green triangles */
 .digi-hero .digi-wrap{ position:relative; z-index:1; width:100%; }
-.digi-hero .digi-crumbs{ color:#c3ccc6 !important; margin-bottom:20px !important; }
+.digi-hero .digi-crumbs{ color:#c3ccc6 !important; margin-bottom:16px !important; }
 .digi-hero .digi-crumbs a{ color:#e3e9e5 !important; }
 .digi-hero .digi-crumbs a:hover{ color:#8FD299 !important; }
-/* icon-list style eyebrow: brand-symbol icon + label */
-.digi-hero .eyebrow{
-  display:inline-flex !important; align-items:center; gap:12px;
-  background:transparent !important; color:#ffffff !important;
-  padding:0 !important; margin:0 0 16px !important;
-  font-size:.82rem !important; letter-spacing:.14em; text-transform:uppercase; font-weight:500 !important;
-}
-.digi-hero .eyebrow::before{
-  content:'\e900' !important;                       /* vamtam brand-symbol glyph */
-  font-family:'vamtam-theme' !important; font-weight:normal;
-  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-  color:#8FD299 !important; font-size:1.15rem; line-height:1;
-  width:auto; height:auto; background:none !important; transform:none !important; border-radius:0;
-}
+/* Eyebrow removed per request (the icon glyph rendered as a stray “✕”). */
+.digi-hero .eyebrow{ display:none !important; }
 .digi-hero h1{
   color:#ffffff !important; font-weight:400; letter-spacing:-.02em;
   background:none !important; display:block !important;
