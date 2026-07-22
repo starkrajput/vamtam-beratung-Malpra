@@ -228,6 +228,55 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 }
 
 /* ============================================================
+   Home "Solutions / Our Expertise / Career" trio — same content
+   as digicomplish.com, rendered in OUR site's design language
+   (white cards, brand-green accents, dark headings).
+   ============================================================ */
+.digi-trio-section{ padding:0 0 96px; }
+.digi-trio{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+.digi-trio-card{
+  display:flex; flex-direction:column; background:#ffffff;
+  border:1px solid rgba(0,0,0,.09); text-decoration:none !important;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.digi-trio-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 30px 60px -34px rgba(0,0,0,.22);
+  border-color:#8FD299;
+}
+.digi-trio-head{ display:block; padding:26px 24px 20px; text-align:center; }
+.digi-trio-eyebrow{
+  display:block; color:#8FD299 !important; font-size:.76rem; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; margin-bottom:10px;
+}
+.digi-trio-title{
+  display:block; color:#161616 !important; font-size:1.35rem;
+  font-weight:500; line-height:1.25;
+}
+.digi-trio-media{ display:block; overflow:hidden; }
+.digi-trio-media img{
+  display:block; width:100%; height:210px; object-fit:cover;
+  transition:transform .5s ease;
+}
+.digi-trio-card:hover .digi-trio-media img{ transform:scale(1.05); }
+.digi-trio-link{
+  display:block; padding:20px 24px 24px; text-align:center;
+  color:#161616 !important; font-weight:600; font-size:.95rem;
+  position:relative;
+}
+.digi-trio-link::after{
+  content:""; display:block; width:28px; height:2px; background:#8FD299;
+  margin:9px auto 0; transition:width .25s ease;
+}
+.digi-trio-card:hover .digi-trio-link::after{ width:64px; }
+@media(max-width:1024px){ .digi-trio{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:767px){
+  .digi-trio{ grid-template-columns:1fr; gap:22px; }
+  .digi-trio-section{ padding-bottom:64px; }
+  .digi-trio-media img{ height:190px; }
+}
+
+/* ============================================================
    Contact page — Google map framing
    ============================================================ */
 .digi-map{ position:relative; width:100%; margin:0; line-height:0; }
