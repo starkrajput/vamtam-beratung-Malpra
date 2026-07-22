@@ -311,8 +311,81 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 .digi-tint .digi-card .num{ color:#F08A00 !important; }
 
 /* ============================================================
-   Contact page — Google map framing
+   Home "Build the Next Phase of Enterprise Capability" band —
+   supporting copy + the two CTAs, matching the reference image
+   (solid orange primary, solid white secondary on the dark band).
    ============================================================ */
-.digi-map{ position:relative; width:100%; margin:0; line-height:0; }
-.digi-map iframe{ width:100%; height:460px; border:0; display:block; filter:grayscale(.15); }
-@media(max-width:960px){ .digi-map iframe{ height:340px; } }
+.digi-cta-extra{ margin-top:18px; }
+.digi-cta-lead{
+  color:#e8ecf2 !important; margin:0 0 28px; max-width:62ch;
+  font-size:1.02rem; line-height:1.62;
+}
+.digi-cta-actions{ display:flex; flex-wrap:wrap; gap:18px; }
+.digi-cta-btn{
+  display:inline-block; padding:17px 34px; text-decoration:none !important;
+  font-weight:600; font-size:.98rem; line-height:1; border:1px solid transparent;
+  transition:background-color .25s ease, color .25s ease, border-color .25s ease, transform .2s ease;
+}
+.digi-cta-btn.primary{ background:#F5A000; color:#ffffff !important; border-color:#F5A000; }
+.digi-cta-btn.primary:hover{ background:#d98c00; border-color:#d98c00; color:#ffffff !important; transform:translateY(-2px); }
+.digi-cta-btn.light{ background:#ffffff; color:#161616 !important; border-color:#ffffff; }
+.digi-cta-btn.light:hover{ background:transparent; color:#ffffff !important; border-color:#ffffff; transform:translateY(-2px); }
+@media(max-width:767px){
+  .digi-cta-actions{ gap:12px; }
+  .digi-cta-btn{ padding:15px 24px; font-size:.92rem; }
+  .digi-cta-lead{ font-size:.98rem; }
+}
+
+/* ============================================================
+   Contact page — "Find us" map band, sitting ABOVE the form.
+   Dark world-map backdrop with the live Google map floating on
+   top as a rounded, shadowed card + an address plate.
+   ============================================================ */
+.digi-mapband{
+  position:relative; overflow:hidden;
+  background:#0d0f12 url('/worldmap.jpg') center/cover no-repeat;
+  padding:84px 0 90px;
+}
+.digi-mapband::before{           /* darken + tint so the card pops */
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(10,12,15,.82) 0%,rgba(10,12,15,.90) 100%);
+}
+.digi-mapband .digi-wrap{ position:relative; z-index:1; }
+.digi-mapband-head{ text-align:center; margin-bottom:38px; }
+.digi-mapband-head .digi-eyebrow{ color:#8FD299 !important; }
+.digi-mapband-head h2{
+  color:#ffffff !important; margin:10px 0 0; font-weight:400;
+  font-size:clamp(1.8rem,3.4vw,2.6rem); line-height:1.12;
+}
+.digi-map-frame{
+  position:relative; border-radius:16px; overflow:hidden;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.09);
+}
+.digi-map-frame iframe{
+  width:100%; height:480px; border:0; display:block;
+  filter:grayscale(.25) contrast(1.03);
+}
+/* floating address plate */
+.digi-map-card{
+  position:absolute; left:28px; bottom:28px; z-index:2;
+  background:#ffffff; border-radius:12px; padding:22px 24px; max-width:330px;
+  box-shadow:0 24px 50px -26px rgba(0,0,0,.55);
+  display:flex; flex-direction:column; gap:6px;
+}
+.digi-map-card-eyebrow{
+  color:#8FD299; font-size:.72rem; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+}
+.digi-map-card strong{ color:#161616; font-size:1.06rem; font-weight:600; }
+.digi-map-card-addr{ color:#5f635e; font-size:.92rem; line-height:1.55; }
+.digi-map-card-link{
+  margin-top:8px; color:#161616 !important; font-weight:600; font-size:.9rem;
+  text-decoration:none !important; align-self:flex-start;
+  border-bottom:2px solid #8FD299; padding-bottom:2px; transition:color .2s ease;
+}
+.digi-map-card-link:hover{ color:#8FD299 !important; }
+@media(max-width:960px){
+  .digi-mapband{ padding:60px 0 64px; }
+  .digi-map-frame iframe{ height:380px; }
+  .digi-map-card{ left:16px; right:16px; bottom:16px; max-width:none; padding:18px 20px; }
+}
