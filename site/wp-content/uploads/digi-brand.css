@@ -15,7 +15,7 @@ header .vamtam-sticky-header--transparent-header .elementor-widget-image img{
 
 /* ---------- Inner pages: solid white header ---------- */
 /* Paint the header section itself white in EVERY state. The theme repaints
-   the sticky bar with --vamtam-sticky-header-bg-color (#374B47, dark green)
+   the sticky bar with --vamtam-sticky-header-bg-color (#2E3238, dark green)
    once you scroll, which left dark nav text unreadable — force that variable
    AND the fixed/scrolled variants back to white so the inner-page header
    stays white with dark text top-to-bottom. */
@@ -49,7 +49,7 @@ header .sub-menu .vamtam-nav-text{ color:#161616 !important; }
      No green pill / no white heading box. ---------- */
 .digi-hero{
   position:relative !important; overflow:hidden !important;
-  background:linear-gradient(180deg,rgba(15,26,20,.55) 0%,rgba(15,26,20,.82) 100%),
+  background:linear-gradient(180deg,rgba(26,28,32,.58) 0%,rgba(26,28,32,.86) 100%),
              url('/wp-content/uploads/2023/06/GettyImages-1185765407.jpg') center/cover no-repeat !important;
   min-height:0 !important;
   display:block !important;
@@ -59,7 +59,7 @@ header .sub-menu .vamtam-nav-text{ color:#161616 !important; }
 .digi-hero .digi-wrap{ position:relative; z-index:1; width:100%; }
 .digi-hero .digi-crumbs{ color:#c3ccc6 !important; margin-bottom:16px !important; }
 .digi-hero .digi-crumbs a{ color:#e3e9e5 !important; }
-.digi-hero .digi-crumbs a:hover{ color:#8FD299 !important; }
+.digi-hero .digi-crumbs a:hover{ color:#FF9B00 !important; }
 /* Eyebrow removed per request (the icon glyph rendered as a stray “✕”). */
 .digi-hero .eyebrow{ display:none !important; }
 .digi-hero h1{
@@ -74,7 +74,7 @@ header .sub-menu .vamtam-nav-text{ color:#161616 !important; }
 .digi-btn{
   background:#161616 !important; color:#ffffff !important; border:1px solid #161616 !important;
 }
-.digi-btn:hover{ background:#8FD299 !important; border-color:#8FD299 !important; color:#ffffff !important; }
+.digi-btn:hover{ background:#FF9B00 !important; border-color:#FF9B00 !important; color:#ffffff !important; }
 .digi-btn.light{ background:#ffffff !important; color:#161616 !important; border-color:#ffffff !important; }
 .digi-btn.light:hover{ background:#161616 !important; color:#ffffff !important; border-color:#161616 !important; }
 .digi-card a[href]:not(.digi-btn){ color:#161616 !important; }
@@ -114,31 +114,31 @@ i[class*="eicon"], i[class*="fa-"], .fa, .fas, .far, .fab, .fal,
 }
 
 /* ============================================================
-   Navbar green state — driven ONLY by digi-brand.js, which adds
-   the .nav-on-green class to a header bar when it detects the bar
+   Navbar accent state — driven ONLY by digi-brand.js, which adds
+   the .nav-on-accent class to a header bar when it detects the bar
    has actually turned green. When it is NOT green, nothing here
    applies and the header keeps its original colours untouched.
    ============================================================ */
-.vamtam-sticky-header.nav-on-green .elementor-item,
-.vamtam-sticky-header.nav-on-green .vamtam-nav-text,
-.vamtam-sticky-header.nav-on-green .vamtam-btn-text,
-.vamtam-sticky-header.nav-on-green .elementor-button,
-.vamtam-sticky-header.nav-on-green .elementor-button-text,
-.vamtam-sticky-header.nav-on-green .sub-arrow,
-.vamtam-sticky-header.nav-on-green .elementor-menu-toggle,
-.vamtam-sticky-header.nav-on-green .elementor-icon i{
+.vamtam-sticky-header.nav-on-accent .elementor-item,
+.vamtam-sticky-header.nav-on-accent .vamtam-nav-text,
+.vamtam-sticky-header.nav-on-accent .vamtam-btn-text,
+.vamtam-sticky-header.nav-on-accent .elementor-button,
+.vamtam-sticky-header.nav-on-accent .elementor-button-text,
+.vamtam-sticky-header.nav-on-accent .sub-arrow,
+.vamtam-sticky-header.nav-on-accent .elementor-menu-toggle,
+.vamtam-sticky-header.nav-on-accent .elementor-icon i{
   color:#ffffff !important;
 }
-.vamtam-sticky-header.nav-on-green .elementor-icon svg{ fill:#ffffff !important; }
+.vamtam-sticky-header.nav-on-accent .elementor-icon svg{ fill:#ffffff !important; }
 
-/* Any button digi-brand.js has detected as green-backgrounded gets white text.
+/* Any button digi-brand.js has detected as accent-backgrounded gets white text.
    (The theme's default is dark text on the green hover fill — client wants white.)
    Applied per-element so transparent / underline buttons are never touched. */
-.elementor-button.btn-on-green,
-.elementor-button.btn-on-green .elementor-button-text,
-.elementor-button.btn-on-green .vamtam-btn-text,
-.elementor-button.btn-on-green *{ color:#ffffff !important; }
-.elementor-button.btn-on-green svg{ fill:#ffffff !important; }
+.elementor-button.btn-on-accent,
+.elementor-button.btn-on-accent .elementor-button-text,
+.elementor-button.btn-on-accent .vamtam-btn-text,
+.elementor-button.btn-on-accent *{ color:#ffffff !important; }
+.elementor-button.btn-on-accent svg{ fill:#ffffff !important; }
 
 /* ============================================================
    Header fix (matches reference image 1): on the SOLID white
@@ -192,11 +192,11 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 }
 .digi-slide-eyebrow{
   display:inline-flex; align-items:center; gap:12px;
-  color:#8FD299; font-size:.82rem; letter-spacing:.16em;
+  color:#FF9B00; font-size:.82rem; letter-spacing:.16em;
   text-transform:uppercase; font-weight:500; margin:0 0 18px;
 }
 .digi-slide-eyebrow::before{
-  content:""; display:inline-block; width:28px; height:2px; background:#8FD299;
+  content:""; display:inline-block; width:28px; height:2px; background:#FF9B00;
 }
 .digi-slide-title{
   /* !important — the theme's `.elementor-kit-5 h1` rule outranks a single class
@@ -204,13 +204,13 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
   color:#ffffff !important; font-weight:400; letter-spacing:-.02em; margin:0 0 28px;
   font-size:clamp(2.1rem,4.4vw,3.7rem); line-height:1.09; max-width:20ch;
 }
-.digi-slide-eyebrow{ color:#8FD299 !important; }
+.digi-slide-eyebrow{ color:#FF9B00 !important; }
 .digi-slide-btn{
   display:inline-block; padding:16px 34px; border:1px solid #ffffff;
   color:#ffffff !important; text-decoration:none; font-size:.95rem;
   transition:background-color .25s ease, border-color .25s ease;
 }
-.digi-slide-btn:hover{ background:#8FD299; border-color:#8FD299; color:#ffffff !important; }
+.digi-slide-btn:hover{ background:#FF9B00; border-color:#FF9B00; color:#ffffff !important; }
 /* staggered "one by one" entrance */
 .digi-slide.is-active .digi-slide-eyebrow{ animation:digiRise .6s .05s both; }
 .digi-slide.is-active .digi-slide-title  { animation:digiRise .6s .22s both; }
@@ -221,7 +221,7 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
   width:30px; height:3px; padding:0; border:0; cursor:pointer;
   background:rgba(255,255,255,.35); transition:background-color .25s ease;
 }
-.digi-slider-dots button.is-active{ background:#8FD299; }
+.digi-slider-dots button.is-active{ background:#FF9B00; }
 @media(max-width:767px){
   .digi-slide-title{ max-width:100%; }
   .digi-slide-btn{ padding:14px 26px; }
@@ -257,11 +257,11 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 .digi-trio-card:hover{
   transform:translateY(-6px);
   box-shadow:0 30px 60px -34px rgba(0,0,0,.22);
-  border-color:#8FD299;
+  border-color:#FF9B00;
 }
 .digi-trio-head{ display:block; padding:26px 24px 20px; text-align:center; }
 .digi-trio-eyebrow{
-  display:block; color:#8FD299 !important; font-size:.76rem; font-weight:600;
+  display:block; color:#FF9B00 !important; font-size:.76rem; font-weight:600;
   letter-spacing:.16em; text-transform:uppercase; margin-bottom:10px;
 }
 .digi-trio-title{
@@ -280,7 +280,7 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
   position:relative;
 }
 .digi-trio-link::after{
-  content:""; display:block; width:28px; height:2px; background:#8FD299;
+  content:""; display:block; width:28px; height:2px; background:#FF9B00;
   margin:9px auto 0; transition:width .25s ease;
 }
 .digi-trio-card:hover .digi-trio-link::after{ width:64px; }
@@ -337,6 +337,106 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 }
 
 /* ============================================================
+   Solutions MEGA-MENU (hover) — wide panel with a 2-column item
+   grid + a featured card, in the NLB-style layout.
+   The theme's smartmenus script still handles show/hide; this only
+   restyles the panel, so the existing open/close behaviour is kept.
+   ============================================================ */
+header .elementor-nav-menu > li.menu-item-has-children{ position:static !important; }
+header ul.sub-menu.digi-mega{
+  left:50% !important; right:auto !important;
+  transform:translateX(-50%);
+  width:min(1180px, calc(100vw - 48px)) !important;
+  max-width:none !important; min-width:0 !important;
+  background:#ffffff !important;
+  border:0 !important; border-radius:0 !important;
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.28) !important;
+  padding:0 !important; margin-top:0 !important;
+}
+header ul.sub-menu.digi-mega > li.digi-mega-li{
+  display:block !important; width:100% !important; background:none !important;
+}
+/* The theme's sub-menu CSS sets white-space:nowrap, which makes each item's
+   min-content enormous and blows the 1fr tracks far past the panel width —
+   force normal wrapping and use minmax(0,1fr) so tracks can actually shrink. */
+header ul.sub-menu.digi-mega,
+header ul.sub-menu.digi-mega *{ white-space:normal !important; }
+.digi-mega-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) 340px;
+  gap:34px 46px; padding:38px 44px 42px;
+}
+.digi-mega-grid{
+  grid-column:1 / 3; min-width:0;
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:30px 46px;
+}
+.digi-mega-item{
+  display:block; text-decoration:none !important; padding:0 !important;
+  background:none !important; line-height:1.45;
+}
+.digi-mega-item .t{
+  display:block; color:#161616 !important; font-size:1.02rem; font-weight:600;
+  margin-bottom:6px; transition:color .2s ease;
+}
+.digi-mega-item .d{ display:block; color:#63676d !important; font-size:.88rem; }
+.digi-mega-item:hover .t{ color:#FF9B00 !important; }
+/* featured card */
+.digi-mega-feature{ border-left:1px solid #ececec; padding-left:38px; }
+.digi-mega-thumb{ display:block; overflow:hidden; background:#23262B; }
+.digi-mega-thumb img{ display:block; width:100%; height:180px; object-fit:cover; }
+.digi-mega-cap{
+  color:#161616 !important; font-size:.98rem; font-weight:600;
+  line-height:1.45; margin:18px 0 20px;
+}
+.digi-mega-link{
+  display:inline-flex; align-items:center; gap:12px;
+  color:#161616 !important; font-weight:600; font-size:.94rem;
+  text-decoration:none !important;
+}
+.digi-mega-link .arw{
+  width:36px; height:36px; border-radius:50%; background:#FF9B00; color:#fff;
+  display:inline-flex; align-items:center; justify-content:center;
+  transition:transform .2s ease;
+}
+.digi-mega-link:hover .arw{ transform:translateX(4px); }
+/* stack on tablet / mobile where the menu becomes a drawer */
+@media(max-width:1024px){
+  header ul.sub-menu.digi-mega{
+    left:0 !important; transform:none; width:100% !important;
+    box-shadow:none !important;
+  }
+  .digi-mega-inner{ grid-template-columns:1fr; gap:22px; padding:18px 20px 24px; }
+  .digi-mega-grid{ grid-column:auto; grid-template-columns:1fr; gap:18px; }
+  .digi-mega-feature{ border-left:0; padding-left:0; border-top:1px solid #ececec; padding-top:20px; }
+  .digi-mega-thumb img{ height:150px; }
+}
+
+/* ============================================================
+   Home: stats band + trio cards (self-contained so they work on
+   the Elementor home template, which has no .digi-wrap styles).
+   Charcoal band + orange accents.
+   ============================================================ */
+.digi-band-wrap{ width:100%; max-width:1280px; margin:0 auto; padding:0 30px; box-sizing:border-box; }
+.digi-statband{ background:#23262B; padding:66px 0; }
+.digi-statgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+.digi-statitem{ text-align:center; }
+.digi-statitem .digi-count{
+  color:#FF9B00 !important; font-weight:600; line-height:1;
+  font-size:clamp(2.6rem,5vw,3.9rem); letter-spacing:-.02em;
+}
+.digi-statlbl{
+  color:#d6d9de; margin-top:12px; font-size:.82rem; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; line-height:1.5;
+}
+.digi-triowrap{ padding:84px 0 96px; background:#ffffff; }
+@media(max-width:1024px){ .digi-statgrid{ grid-template-columns:1fr; gap:38px; } }
+@media(max-width:767px){
+  .digi-statband{ padding:52px 0; }
+  .digi-triowrap{ padding:58px 0 64px; }
+  .digi-band-wrap{ padding:0 20px; }
+}
+
+/* ============================================================
    Legal pages (Privacy Policy / Terms of Use) — readable measure
    and clear section rhythm.
    ============================================================ */
@@ -348,8 +448,8 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 }
 .digi-legal h2:first-of-type{ margin-top:0; }
 .digi-legal p{ color:#3b3f3b; line-height:1.75; margin:0 0 14px; }
-.digi-legal a{ color:#161616; border-bottom:1px solid #8FD299; }
-.digi-legal a:hover{ color:#8FD299; }
+.digi-legal a{ color:#161616; border-bottom:1px solid #FF9B00; }
+.digi-legal a:hover{ color:#FF9B00; }
 .digi-legal .digi-list{ margin:6px 0 14px; }
 .digi-legal .digi-list li{ margin-bottom:9px; line-height:1.6; }
 
@@ -360,7 +460,7 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
    ============================================================ */
 .digi-mapband{
   position:relative; overflow:hidden;
-  background:#0d0f12 url('/worldmap.jpg') center/cover no-repeat;
+  background:#0d0f12 url('/worldmap-bg.jpg') center/cover no-repeat;
   padding:84px 0 90px;
 }
 .digi-mapband::before{           /* darken + tint so the card pops */
@@ -369,7 +469,7 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 }
 .digi-mapband .digi-wrap{ position:relative; z-index:1; }
 .digi-mapband-head{ text-align:center; margin-bottom:38px; }
-.digi-mapband-head .digi-eyebrow{ color:#8FD299 !important; }
+.digi-mapband-head .digi-eyebrow{ color:#FF9B00 !important; }
 .digi-mapband-head h2{
   color:#ffffff !important; margin:10px 0 0; font-weight:400;
   font-size:clamp(1.8rem,3.4vw,2.6rem); line-height:1.12;
@@ -390,7 +490,7 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
   display:flex; flex-direction:column; gap:6px;
 }
 .digi-map-card-eyebrow{
-  color:#8FD299; font-size:.72rem; font-weight:700;
+  color:#FF9B00; font-size:.72rem; font-weight:700;
   letter-spacing:.16em; text-transform:uppercase;
 }
 .digi-map-card strong{ color:#161616; font-size:1.06rem; font-weight:600; }
@@ -398,9 +498,9 @@ body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fil
 .digi-map-card-link{
   margin-top:8px; color:#161616 !important; font-weight:600; font-size:.9rem;
   text-decoration:none !important; align-self:flex-start;
-  border-bottom:2px solid #8FD299; padding-bottom:2px; transition:color .2s ease;
+  border-bottom:2px solid #FF9B00; padding-bottom:2px; transition:color .2s ease;
 }
-.digi-map-card-link:hover{ color:#8FD299 !important; }
+.digi-map-card-link:hover{ color:#FF9B00 !important; }
 @media(max-width:960px){
   .digi-mapband{ padding:60px 0 64px; }
   .digi-map-frame iframe{ height:380px; }

@@ -9,16 +9,16 @@
 (function () {
   'use strict';
 
-  // Brand green is #8FD299 => rgb(143,210,153). Treat a bar as green
-  // when its background is opaque and clearly green-dominant.
-  function isGreen(bg) {
+  // Brand accent is #FF9B00 => rgb(255,155,0). Treat a surface as "accent"
+  // when it is opaque and clearly warm/orange-dominant (red high, blue low).
+  function isAccent(bg) {
     if (!bg) return false;
     var m = bg.match(/rgba?\(([^)]+)\)/);
     if (!m) return false;
     var p = m[1].split(',').map(function (n) { return parseFloat(n); });
     var r = p[0], g = p[1], b = p[2], a = p.length > 3 ? p[3] : 1;
-    if (a < 0.5) return false;                 // transparent bar => not green
-    return g > 120 && (g - r) > 25 && (g - b) > 25;
+    if (a < 0.5) return false;                 // transparent => not accent
+    return r > 180 && (r - b) > 90 && g < 210 && (g - b) > 40;
   }
 
   function bars() {
@@ -27,8 +27,8 @@
 
   function update() {
     bars().forEach(function (bar) {
-      var green = isGreen(getComputedStyle(bar).backgroundColor);
-      bar.classList.toggle('nav-on-green', green);
+      var accent = isAccent(getComputedStyle(bar).backgroundColor);
+      bar.classList.toggle('nav-on-accent', accent);
     });
   }
 
@@ -37,7 +37,7 @@
   // (transparent / underline styles) are never touched.
   function markBtn(btn) {
     if (!btn) return;
-    btn.classList.toggle('btn-on-green', isGreen(getComputedStyle(btn).backgroundColor));
+    btn.classList.toggle('btn-on-accent', isAccent(getComputedStyle(btn).backgroundColor));
   }
   function btnFrom(e) {
     var t = e.target;
@@ -52,10 +52,10 @@
       var b = btnFrom(e); if (b) requestAnimationFrame(function () { markBtn(b); });
     }, true);
     document.addEventListener('mouseout', function (e) {
-      var b = btnFrom(e); if (b) b.classList.remove('btn-on-green');
+      var b = btnFrom(e); if (b) b.classList.remove('btn-on-accent');
     }, true);
     document.addEventListener('focusout', function (e) {
-      var b = btnFrom(e); if (b) b.classList.remove('btn-on-green');
+      var b = btnFrom(e); if (b) b.classList.remove('btn-on-accent');
     }, true);
     // Also catch buttons that are green in their RESTING state.
     document.querySelectorAll('.elementor-button').forEach(markBtn);
@@ -190,11 +190,64 @@
     }, 5000);
   }
 
+  // ---------- Solutions mega-menu placement ----------
+  // The theme's smartmenus script writes an inline `left` on every open
+  // sub-menu, which beats CSS. So instead of fighting it in the stylesheet we
+  // re-place the panel here (fixed + centred under the header) whenever it is
+  // shown, and re-assert it on resize/scroll.
+  function initMega() {
+    var panels = [].slice.call(document.querySelectorAll('ul.sub-menu.digi-mega'));
+    if (!panels.length) return;
+
+    function place(panel) {
+      if (window.innerWidth <= 1024) {           // drawer mode — leave to CSS
+        ['position', 'left', 'top', 'transform', 'width'].forEach(function (p) {
+          panel.style.removeProperty(p);
+        });
+        return;
+      }
+      var hdr = panel.closest('header') || document.querySelector('header');
+      var bottom = hdr ? hdr.getBoundingClientRect().bottom : 0;
+      var w = Math.min(1180, document.documentElement.clientWidth - 48);
+      panel.style.setProperty('position', 'fixed', 'important');
+      panel.style.setProperty('left', '50%', 'important');
+      panel.style.setProperty('transform', 'translateX(-50%)', 'important');
+      panel.style.setProperty('top', Math.max(0, bottom) + 'px', 'important');
+      panel.style.setProperty('width', w + 'px', 'important');
+      panel.style.setProperty('margin', '0', 'important');
+    }
+
+    function visible(el) {
+      var cs = getComputedStyle(el);
+      return cs.display !== 'none' && cs.visibility !== 'hidden';
+    }
+
+    panels.forEach(function (panel) {
+      // re-place whenever smartmenus toggles it
+      try {
+        new MutationObserver(function () { if (visible(panel)) place(panel); })
+          .observe(panel, { attributes: true, attributeFilter: ['style', 'class'] });
+      } catch (e) { /* observer unsupported — hover handler below still covers it */ }
+      var li = panel.closest('li');
+      if (li) {
+        li.addEventListener('mouseenter', function () { setTimeout(function () { place(panel); }, 0); });
+        li.addEventListener('focusin', function () { place(panel); });
+      }
+    });
+    window.addEventListener('resize', function () {
+      panels.forEach(function (p) { if (visible(p)) place(p); });
+    }, { passive: true });
+    window.addEventListener('scroll', function () {
+      panels.forEach(function (p) { if (visible(p)) place(p); });
+    }, { passive: true });
+  }
+
   function boot() {
     update();
     bindButtons();
     initSliders();
     initCounters();
+    initMega();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update, { passive: true });
     // Catch class/style changes made by the theme's sticky script.
