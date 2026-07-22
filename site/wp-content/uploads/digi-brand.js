@@ -32,8 +32,38 @@
     });
   }
 
+  // Buttons: when a button's own background actually turns green (e.g. the
+  // theme's green hover fill), give it white text. Non-green buttons
+  // (transparent / underline styles) are never touched.
+  function markBtn(btn) {
+    if (!btn) return;
+    btn.classList.toggle('btn-on-green', isGreen(getComputedStyle(btn).backgroundColor));
+  }
+  function btnFrom(e) {
+    var t = e.target;
+    return t && t.closest ? t.closest('.elementor-button') : null;
+  }
+  function bindButtons() {
+    // Delegated hover — measured AFTER the hover style applies (rAF).
+    document.addEventListener('mouseover', function (e) {
+      var b = btnFrom(e); if (b) requestAnimationFrame(function () { markBtn(b); });
+    }, true);
+    document.addEventListener('focusin', function (e) {
+      var b = btnFrom(e); if (b) requestAnimationFrame(function () { markBtn(b); });
+    }, true);
+    document.addEventListener('mouseout', function (e) {
+      var b = btnFrom(e); if (b) b.classList.remove('btn-on-green');
+    }, true);
+    document.addEventListener('focusout', function (e) {
+      var b = btnFrom(e); if (b) b.classList.remove('btn-on-green');
+    }, true);
+    // Also catch buttons that are green in their RESTING state.
+    document.querySelectorAll('.elementor-button').forEach(markBtn);
+  }
+
   function boot() {
     update();
+    bindButtons();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update, { passive: true });
     // Catch class/style changes made by the theme's sticky script.

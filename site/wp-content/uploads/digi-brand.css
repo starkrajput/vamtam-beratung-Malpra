@@ -35,63 +35,58 @@ header .elementor-element-7ad430b img{ height:34px !important; width:auto !impor
 header .sub-menu .elementor-sub-item,
 header .sub-menu .vamtam-nav-text{ color:#161616 !important; }
 
-/* ---------- Inner-page banner (matches the reference) ---------- */
+/* ---------- Inner-page banner — matches the Beratung template hero
+     (element bb67810): a full-width section with a background image +
+     dark overlay, the content aligned toward the BOTTOM, an icon-list
+     eyebrow (brand-symbol glyph + label) and a large plain H1.
+     No green pill / no white heading box. ---------- */
 .digi-hero{
   position:relative !important; overflow:hidden !important;
-  background-color:#e7edf2 !important;                /* light blue-gray */
-  background-image:url('/wp-content/uploads/2023/07/dots-left.png') !important;
-  background-repeat:no-repeat !important;
-  background-position:left center !important;
-  background-size:auto 100% !important;
-  padding:140px 0 92px !important;
+  background:linear-gradient(180deg,rgba(15,26,20,.55) 0%,rgba(15,26,20,.82) 100%),
+             url('/wp-content/uploads/2023/06/GettyImages-1185765407.jpg') center/cover no-repeat !important;
+  min-height:460px !important;
+  display:flex !important; align-items:flex-end !important;   /* content at the bottom */
+  padding:170px 0 62px !important;
 }
-/* translucent green triangles on the right */
-.digi-hero::before{
-  content:"" !important; position:absolute; z-index:0;
-  right:30px; top:24px; width:280px; height:380px;
-  background:rgba(143,210,153,.32);
-  clip-path:polygon(100% 0, 100% 100%, 0 100%);
-}
-.digi-hero::after{
-  content:"" !important; position:absolute; z-index:0;
-  right:150px; top:-40px; width:300px; height:430px;
-  background:rgba(143,210,153,.22);
-  clip-path:polygon(100% 0, 100% 100%, 0 100%);
-}
-.digi-hero .digi-wrap{ position:relative; z-index:1; }
-.digi-hero .digi-crumbs{ color:#5f6b73 !important; }
+.digi-hero::before, .digi-hero::after{ content:none !important; }   /* drop the old green triangles */
+.digi-hero .digi-wrap{ position:relative; z-index:1; width:100%; }
+.digi-hero .digi-crumbs{ color:#c3ccc6 !important; margin-bottom:20px !important; }
+.digi-hero .digi-crumbs a{ color:#e3e9e5 !important; }
 .digi-hero .digi-crumbs a:hover{ color:#8FD299 !important; }
-/* dark-green label tag with the brand slash */
+/* icon-list style eyebrow: brand-symbol icon + label */
 .digi-hero .eyebrow{
   display:inline-flex !important; align-items:center; gap:12px;
-  background:#2f4a3a !important; color:#ffffff !important;
-  padding:13px 24px !important; margin-bottom:0 !important;
-  font-size:.82rem !important; letter-spacing:.12em; text-transform:uppercase; font-weight:500 !important;
+  background:transparent !important; color:#ffffff !important;
+  padding:0 !important; margin:0 0 16px !important;
+  font-size:.82rem !important; letter-spacing:.14em; text-transform:uppercase; font-weight:500 !important;
 }
 .digi-hero .eyebrow::before{
-  content:"" !important; width:16px; height:22px; background:#8FD299 !important;
-  transform:skewX(-14deg); display:inline-block; border-radius:0;
+  content:'\e900' !important;                       /* vamtam brand-symbol glyph */
+  font-family:'vamtam-theme' !important; font-weight:normal;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  color:#8FD299 !important; font-size:1.15rem; line-height:1;
+  width:auto; height:auto; background:none !important; transform:none !important; border-radius:0;
 }
 .digi-hero h1{
-  color:#161616 !important; font-weight:400; letter-spacing:-.02em;
-  background:#ffffff !important; display:inline-block !important;
-  padding:26px 40px 26px 30px !important; margin:0 !important; max-width:20ch;
+  color:#ffffff !important; font-weight:400; letter-spacing:-.02em;
+  background:none !important; display:block !important;
+  padding:0 !important; margin:0 !important; max-width:18ch;
+  font-size:clamp(2.4rem,4.6vw,4rem) !important; line-height:1.06 !important;
 }
-.digi-hero p{ color:#3b464d !important; margin-top:26px !important; max-width:56ch; }
+.digi-hero p{ color:#cdd4cf !important; margin-top:22px !important; max-width:56ch; }
 
 /* ---------- Buttons: clearly visible (template colours) ---------- */
 .digi-btn{
   background:#161616 !important; color:#ffffff !important; border:1px solid #161616 !important;
 }
-.digi-btn:hover{ background:#8FD299 !important; border-color:#8FD299 !important; color:#161616 !important; }
+.digi-btn:hover{ background:#8FD299 !important; border-color:#8FD299 !important; color:#ffffff !important; }
 .digi-btn.light{ background:#ffffff !important; color:#161616 !important; border-color:#ffffff !important; }
 .digi-btn.light:hover{ background:#161616 !important; color:#ffffff !important; border-color:#161616 !important; }
 .digi-card a[href]:not(.digi-btn){ color:#161616 !important; }
 
 @media(max-width:960px){
-  .digi-hero{ padding:120px 0 64px !important; background-size:auto 70% !important; }
-  .digi-hero::before,.digi-hero::after{ opacity:.5; }
-  .digi-hero h1{ padding-right:24px !important; }
+  .digi-hero{ min-height:360px !important; padding:130px 0 48px !important; }
+  .digi-hero h1{ max-width:100% !important; }
 }
 
 /* ============================================================
@@ -141,6 +136,15 @@ i[class*="eicon"], i[class*="fa-"], .fa, .fas, .far, .fab, .fal,
 }
 .vamtam-sticky-header.nav-on-green .elementor-icon svg{ fill:#ffffff !important; }
 
+/* Any button digi-brand.js has detected as green-backgrounded gets white text.
+   (The theme's default is dark text on the green hover fill — client wants white.)
+   Applied per-element so transparent / underline buttons are never touched. */
+.elementor-button.btn-on-green,
+.elementor-button.btn-on-green .elementor-button-text,
+.elementor-button.btn-on-green .vamtam-btn-text,
+.elementor-button.btn-on-green *{ color:#ffffff !important; }
+.elementor-button.btn-on-green svg{ fill:#ffffff !important; }
+
 /* ============================================================
    Header fix (matches reference image 1): on the SOLID white
    inner-page header the "Contact us" CTA must be a visible dark
@@ -167,9 +171,15 @@ body.digi-page header .elementor-button::after{
   border:1px solid #161616 !important; border-radius:inherit;
   pointer-events:none !important; z-index:0; transition:background-color .2s ease;
 }
-/* Hover: fill dark, white text */
+/* Hover: fill dark, ALL text/icons white (covers the phone button, whose
+   label is not wrapped in .elementor-button-text and was going dark-on-dark) */
 body.digi-page header .elementor-button:hover::after{ background:#161616 !important; }
-body.digi-page header .elementor-button:hover .elementor-button-text{ color:#ffffff !important; }
+body.digi-page header .elementor-button:hover,
+body.digi-page header .elementor-button:hover .elementor-button-text,
+body.digi-page header .elementor-button:hover .vamtam-btn-text,
+body.digi-page header .elementor-button:hover *{ color:#ffffff !important; }
+body.digi-page header .elementor-button:hover .elementor-button-icon i,
+body.digi-page header .elementor-button:hover svg{ color:#ffffff !important; fill:#ffffff !important; }
 
 /* ============================================================
    Contact page — Google map framing
